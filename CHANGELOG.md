@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.10...v1.0.11) (2026-11-18)
+
+### Bug Fixes
+
+* publish the French Pokemon names file ([8b20b3e](https://github.com/Rudze/WEB-MC-Paradisia/commit/8b20b3e23dc8a1f2d4e4aab50a2f3259c48e0cd3))
+* show Pokemon details in French and add a pink shop tab ([a623f70](https://github.com/Rudze/WEB-MC-Paradisia/commit/a623f7081db47335f2a5769459ea9f8f2ac8a1f3))
+
 ## [1.0.10](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.9...v1.0.10) (2026-11-18)
 
 ### Bug Fixes
