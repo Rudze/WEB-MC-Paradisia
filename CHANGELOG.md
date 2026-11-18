@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.1...v1.0.2) (2026-11-18)
+
+### Bug Fixes
+
+* publish the players' data with the site through GitHub Actions instead of calling the API from the browser ([9ffad7c](https://github.com/Rudze/WEB-MC-Paradisia/commit/9ffad7c0f8831db864cb7ed4c760140d33d0bbb4))
+
 ## [1.0.1](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.0...v1.0.1) (2026-11-18)
 
 ### Bug Fixes
