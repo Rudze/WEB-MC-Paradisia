@@ -321,10 +321,15 @@
           <h2 class="h2 article-title">Carte</h2>
         </header>
 
-        <p class="section-text">La carte du monde de construction, mise à jour toutes les quelques minutes.</p>
+        <div class="map-head">
+          <p>La carte du monde de construction, mise à jour toutes les quelques minutes.</p>
+          <button class="btn" data-map-fullscreen>
+            <ion-icon name="expand-outline"></ion-icon><span>Plein écran</span>
+          </button>
+        </div>
 
         <!-- the map is only loaded when the tab is opened (src set by script.js) -->
-        <iframe class="map-frame" data-map-frame title="Carte du monde de construction"></iframe>
+        <iframe class="map-frame" data-map-frame title="Carte du monde de construction" allowfullscreen></iframe>
 
       </article>
 

@@ -405,6 +405,13 @@ function showPage(name) {
   if (name === 'carte' && !mapFrame.src) mapFrame.src = './map/';
 }
 
+// the map can be shown on the whole screen (iPhones can't: the map opens on its own page instead)
+$('[data-map-fullscreen]').addEventListener('click', () => {
+  const frame = $('[data-map-frame]');
+  if (frame.requestFullscreen) frame.requestFullscreen();
+  else location.href = './map/';
+});
+
 navLinks.forEach((link) => link.addEventListener('click', () => {
   const page = link.dataset.navLink;
   showPage(page);
