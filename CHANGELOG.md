@@ -1,3 +1,9 @@
+## [1.0.3](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.2...v1.0.3) (2026-11-18)
+
+### Bug Fixes
+
+* add home, players and blog tabs with Minecraft and Numismatic icons ([dd3a179](https://github.com/Rudze/WEB-MC-Paradisia/commit/dd3a179e2613001bf061a534bc87bfc1fd24e12f))
+
 ## [1.0.2](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.1...v1.0.2) (2026-11-18)
 
 ### Bug Fixes
