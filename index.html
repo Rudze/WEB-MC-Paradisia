@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paradisia — Joueurs</title>
+
+  <link rel="icon" href="./assets/images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--
+    - #BACKGROUND (same animated halos and dot grid as the portfolio)
+  -->
+  <div class="bg-fx" data-bg-fx aria-hidden="true">
+    <span class="bg-blob bg-blob-1"></span>
+    <span class="bg-blob bg-blob-2"></span>
+    <span class="bg-blob bg-blob-3"></span>
+    <div class="bg-dots"></div>
+    <div class="bg-dots bg-dots-lit"></div>
+  </div>
+
+  <main>
+
+    <!--
+      - #SIDEBAR: server logo, status and the player search
+    -->
+    <aside class="sidebar">
+
+      <div class="sidebar-info">
+        <figure class="avatar-box">
+          <img src="./assets/images/logo.png" alt="Paradisia" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name">Paradisia</h1>
+          <p class="title" data-server-status>Connexion…</p>
+        </div>
+      </div>
+
+      <div class="separator"></div>
+
+      <label class="search">
+        <ion-icon name="search-outline"></ion-icon>
+        <input type="search" placeholder="Rechercher un joueur" data-search autocomplete="off">
+      </label>
+
+      <ul class="player-list has-scrollbar" data-player-list>
+        <!-- filled by script.js -->
+      </ul>
+
+    </aside>
+
+    <!--
+      - #PLAYER: everything about the selected player
+    -->
+    <article class="player">
+
+      <header>
+        <h2 class="h2 article-title" data-player-title>Joueurs</h2>
+      </header>
+
+      <p class="empty" data-empty>Choisis un joueur dans la liste pour voir ses statistiques.</p>
+
+      <div class="cards" data-cards hidden>
+
+        <!-- profile: head, health, armour, food -->
+        <section class="card card-profile">
+          <div class="profile-head">
+            <img data-head alt="" width="80" height="80">
+            <div>
+              <p class="profile-name" data-name></p>
+              <p class="badge" data-online></p>
+              <p class="muted" data-last-seen></p>
+            </div>
+          </div>
+
+          <ul class="bars">
+            <li><span class="bar-label">❤️ Vie</span><span class="bar"><span data-bar="health"></span></span><span data-value="health"></span></li>
+            <li><span class="bar-label">🛡️ Armure</span><span class="bar"><span data-bar="armor"></span></span><span data-value="armor"></span></li>
+            <li><span class="bar-label">🍗 Faim</span><span class="bar"><span data-bar="food"></span></span><span data-value="food"></span></li>
+          </ul>
+
+          <ul class="facts" data-profile-facts></ul>
+
+          <ul class="armor-list" data-armor></ul>
+        </section>
+
+        <!-- money -->
+        <section class="card">
+          <h3 class="h3 card-title">💰 Économie</h3>
+          <ul class="coins" data-coins></ul>
+        </section>
+
+        <!-- pokédex -->
+        <section class="card">
+          <h3 class="h3 card-title">📕 Pokédex</h3>
+          <ul class="facts" data-pokedex></ul>
+          <span class="bar bar-wide"><span data-bar="pokedex"></span></span>
+        </section>
+
+        <!-- party -->
+        <section class="card card-wide">
+          <h3 class="h3 card-title">⚔️ Équipe</h3>
+          <ul class="pokemon-grid party" data-party></ul>
+        </section>
+
+        <!-- pc, one box at a time -->
+        <section class="card card-wide">
+          <div class="card-title-row">
+            <h3 class="h3 card-title">💻 PC</h3>
+            <div class="box-nav">
+              <button data-box-prev aria-label="Boîte précédente"><ion-icon name="chevron-back"></ion-icon></button>
+              <span data-box-name></span>
+              <button data-box-next aria-label="Boîte suivante"><ion-icon name="chevron-forward"></ion-icon></button>
+            </div>
+          </div>
+          <ul class="pokemon-grid pc" data-pc></ul>
+        </section>
+
+        <!-- details of the pokémon clicked in the party or the pc -->
+        <section class="card card-wide" data-pokemon-card hidden>
+          <h3 class="h3 card-title" data-pokemon-title></h3>
+          <div class="pokemon-details" data-pokemon-details></div>
+        </section>
+
+        <!-- play time and other statistics -->
+        <section class="card card-wide">
+          <h3 class="h3 card-title">⏱️ Statistiques</h3>
+          <ul class="stats" data-stats></ul>
+        </section>
+
+      </div>
+
+    </article>
+
+  </main>
+
+  <script src="./assets/js/script.js"></script>
+
+  <!-- ionicons, the same icon set as the portfolio -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
