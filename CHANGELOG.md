@@ -1,3 +1,9 @@
+## [1.0.4](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.3...v1.0.4) (2026-11-18)
+
+### Bug Fixes
+
+* link the Discord invite on the home page ([ae31ed2](https://github.com/Rudze/WEB-MC-Paradisia/commit/ae31ed231e47f8d294a072123ce48e6042ac94a1))
+
 ## [1.0.3](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.2...v1.0.3) (2026-11-18)
 
 ### Bug Fixes
