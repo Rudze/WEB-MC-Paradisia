@@ -4,6 +4,8 @@
 
 <h2 align="center">
   Paradisia — Joueurs
+  <br/>
+  <a href="https://rudze.github.io/WEB-MC-Paradisia/" target="_blank">rudze.github.io/WEB-MC-Paradisia</a>
 </h2>
 
 ---
@@ -22,6 +24,8 @@
 **Paradisia — Joueurs** est le tableau de bord des joueurs du serveur Minecraft **Paradisia** (Cobblemon). Il permet de chercher un joueur, puis d'afficher ses statistiques, son argent et ses Pokémon.
 
 C'est un **site statique léger** : HTML, CSS et JavaScript, sans framework et sans étape de build. Il est hébergé sur **GitHub Pages**. Il reprend le thème du site [Portfolio Personal](https://github.com/Rudze/WEB-Portfolio-Personal-main).
+
+➡️ **Site en ligne :** [https://rudze.github.io/WEB-MC-Paradisia/](https://rudze.github.io/WEB-MC-Paradisia/)
 
 Les données viennent de l'API du serveur Minecraft, fournie par le mod `nh_api`. Ce mod est documenté dans le repo [JAVA-MC-MODS-Paradisia](https://github.com/Rudze/JAVA-MC-MODS-Paradisia), dossier `mods/MC-NewHorizon-Mod-Api`.
 
@@ -51,10 +55,13 @@ WEB-MC-Paradisia/
 ├── .releaserc.json             # Configuration de semantic-release
 ├── .github/
 │   └── workflows/
+│       ├── pages.yml           # Toutes les 5 min : récupère les données et publie le site
 │       └── release.yml         # Release à chaque push sur main
+├── scripts/
+│   └── fetch_data.py           # Télécharge les données de l'API dans data/
 └── assets/
     ├── css/style.css           # Thème (repris du portfolio)
-    ├── js/script.js            # Récupère les données de l'API et remplit la page
+    ├── js/script.js            # Lit les fichiers de data/ et remplit la page
     └── images/                 # Logo et favicon
 ```
 
@@ -62,11 +69,15 @@ WEB-MC-Paradisia/
 
 ## Comment ça marche
 
-Le site est hébergé sur **GitHub Pages**. Le navigateur appelle directement l'**API publique** du serveur Minecraft :
-- pas de clé, car les données ne sont pas sensibles ;
-- l'adresse est la constante `API`, en haut de `assets/js/script.js`.
+```
+serveur Minecraft (API nh_api) ──> GitHub Actions, toutes les 5 min ──> data/*.json ──> GitHub Pages ──> navigateur
+```
 
-L'API doit être en **HTTPS**. GitHub Pages sert le site en HTTPS, et un navigateur bloque les appels HTTP faits depuis une page HTTPS. Sur le VPS, un reverse proxy (Caddy) gère le certificat et transmet les requêtes au mod `nh_api`, qui écoute sur `127.0.0.1:8091`.
+- **Pas d'appel à l'API depuis le navigateur.** GitHub Actions télécharge les données et les publie avec le site, en fichiers JSON. La page ne lit que ses propres fichiers.
+- **Rien à installer sur le serveur**, et ni clé ni token : l'API est publique et en lecture seule.
+- **Les données ont quelques minutes de retard.** L'heure de la dernière mise à jour s'affiche sous le nombre de joueurs en ligne.
+- **Si le serveur change d'adresse**, modifie `API_URL` dans `scripts/fetch_data.py`.
+- **Inactivité :** GitHub met en pause les tâches planifiées d'un repo sans commit depuis 60 jours. Il suffit alors de les relancer depuis l'onglet **Actions**.
 
 Les images viennent de services publics :
 - les têtes des joueurs : [mc-heads.net](https://mc-heads.net) ;
@@ -77,6 +88,7 @@ Les images viennent de services publics :
 ## Lancer en local
 
 ```bash
+python3 scripts/fetch_data.py
 python3 -m http.server 8000
 ```
 
@@ -86,11 +98,7 @@ Ouvre ensuite **http://localhost:8000**.
 
 ## Mise en ligne
 
-Dans le repo GitHub, va dans **Settings → Pages → Build and deployment** :
-- **Source** : `Deploy from a branch` ;
-- **Branch** : `main`, dossier `/ (root)`.
-
-Le site est ensuite publié à chaque push sur `main`.
+Dans le repo GitHub, va dans **Settings → Pages → Build and deployment** et mets **Source** sur **GitHub Actions**. C'est le workflow `pages.yml` qui publie le site.
 
 ---
 

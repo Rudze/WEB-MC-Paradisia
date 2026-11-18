@@ -3,12 +3,12 @@
 /*
  * Paradisia player dashboard.
  *
- * The page reads its data from the Minecraft server's public API (mod nh_api).
- * The address must be HTTPS: GitHub Pages serves the site over HTTPS, and browsers block
- * HTTP requests made from an HTTPS page.
+ * The data comes from the Minecraft server's API (mod nh_api). GitHub Actions downloads it every
+ * few minutes into the data/ folder of the site (scripts/fetch_data.py), so the page only reads
+ * JSON files of the site itself: "/players/Rudzee" -> ./data/players/Rudzee.json
  */
 
-const API = 'https://vps-12df6529.vps.ovh.ca/api';
+const DATA = './data';
 
 // pictures from public services
 const headUrl = (uuid, size) => `https://mc-heads.net/avatar/${uuid}/${size}`;
@@ -52,7 +52,7 @@ let boxIndex = 0;        // box currently shown
 \*-----------------------------------*/
 
 async function getJson(path) {
-  const response = await fetch(API + path);
+  const response = await fetch(DATA + path + '.json', { cache: 'no-store' });
   if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
   return response.json();
 }
@@ -108,7 +108,8 @@ function setBar(name, value, max) {
 async function loadServer() {
   try {
     const health = await getJson('/health');
-    serverStatus.textContent = `${health.onlinePlayers} / ${health.maxPlayers} en ligne`;
+    const time = new Date(health.updatedAt).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    serverStatus.textContent = `${health.onlinePlayers} / ${health.maxPlayers} en ligne · maj ${time}`;
   } catch (error) {
     serverStatus.textContent = 'Serveur hors ligne';
   }
@@ -163,8 +164,8 @@ async function showPlayer(name) {
   if (!name) return;
   try {
     const [player, pokemon] = await Promise.all([
-      getJson('/players/' + encodeURIComponent(name)),
-      getJson('/players/' + encodeURIComponent(name) + '/pokemon'),
+      getJson('/players/' + name),
+      getJson('/players/' + name + '/pokemon'),
     ]);
     renderProfile(player);
     renderEconomy(player.economy);
@@ -398,5 +399,5 @@ window.addEventListener('hashchange', () => showPlayer(decodeURIComponent(locati
 loadServer();
 loadPlayers().then(() => showPlayer(decodeURIComponent(location.hash.slice(1))));
 
-// refresh the online counter every 30 seconds
-setInterval(loadServer, 30000);
+// the data is refreshed every few minutes, so the counter is reloaded every minute
+setInterval(loadServer, 60000);
