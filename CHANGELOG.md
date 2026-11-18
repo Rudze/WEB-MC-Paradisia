@@ -1,3 +1,9 @@
+## [1.0.6](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.5...v1.0.6) (2026-11-18)
+
+### Bug Fixes
+
+* rework the home page with Prism and CurseForge install guides ([6c99af3](https://github.com/Rudze/WEB-MC-Paradisia/commit/6c99af3f47876c9c069ec5bb86958df573b400f2))
+
 ## [1.0.5](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.4...v1.0.5) (2026-11-18)
 
 ### Bug Fixes
