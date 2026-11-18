@@ -45,6 +45,24 @@ let players = [];        // every player who ever joined
 let pcBoxes = [];        // boxes of the selected player's pc
 let boxIndex = 0;        // box currently shown
 
+// French names of species, moves, abilities, natures and items (assets/data/fr.json,
+// made from Cobblemon's translations by scripts/make_translations.py)
+let FR = { species: {}, moves: {}, abilities: {}, natures: {}, items: {} };
+
+async function loadTranslations() {
+  try {
+    FR = await (await fetch('./assets/data/fr.json')).json();
+  } catch (error) {
+    // the English names stay
+  }
+}
+
+// "cobblemon:eevee" -> "Évoli"
+const speciesName = (pokemon) => FR.species[pokemon.speciesId.split(':').pop()] || pokemon.species;
+const pokemonName = (pokemon) => pokemon.nickname || speciesName(pokemon);
+// a move, ability, nature or item in French, or its English id made readable
+const french = (section, id) => FR[section][id] || prettify(id);
+
 
 
 /*-----------------------------------*\
@@ -293,7 +311,7 @@ function pokemonSlot(pokemon, showName) {
   if (!pokemon) return slot;
 
   const button = el('button');
-  button.title = pokemon.nickname || pokemon.species;
+  button.title = pokemonName(pokemon);
 
   const sprite = el('img');
   sprite.src = spriteUrl(pokemon);
@@ -303,7 +321,7 @@ function pokemonSlot(pokemon, showName) {
 
   button.append(sprite, el('span', 'level', 'N.' + pokemon.level));
   if (pokemon.shiny) button.append(el('span', 'star', '★'));
-  if (showName) button.append(el('span', 'slot-name', pokemon.nickname || pokemon.species));
+  if (showName) button.append(el('span', 'slot-name', pokemonName(pokemon)));
 
   button.addEventListener('click', () => {
     document.querySelectorAll('.slot button.active').forEach((other) => other.classList.remove('active'));
@@ -339,7 +357,7 @@ function showPokemon(pokemon) {
   const card = $('[data-pokemon-card]');
   const gender = GENDERS[pokemon.gender] || '';
   $('[data-pokemon-title]').textContent =
-    `${pokemon.shiny ? '★ ' : ''}${pokemon.nickname || pokemon.species} ${gender} — N.${pokemon.level}`;
+    `${pokemon.shiny ? '★ ' : ''}${pokemonName(pokemon)} ${gender} — N.${pokemon.level}`;
 
   const sprite = el('img');
   sprite.src = spriteUrl(pokemon);
@@ -348,12 +366,12 @@ function showPokemon(pokemon) {
   // general information
   const facts = el('ul', 'facts');
   fillFacts(facts, [
-    ['Espèce', `#${pokemon.dexNumber} ${pokemon.species}`],
+    ['Espèce', `#${pokemon.dexNumber} ${speciesName(pokemon)}`],
     ['PV', `${pokemon.health.current} / ${pokemon.health.max}`],
-    ['Nature', prettify(pokemon.nature)],
-    ['Talent', prettify(pokemon.ability)],
-    ['Objet tenu', pokemon.heldItem ? prettify(pokemon.heldItem) : '—'],
-    ['Ball', prettify(pokemon.ball)],
+    ['Nature', french('natures', pokemon.nature)],
+    ['Talent', french('abilities', pokemon.ability)],
+    ['Objet tenu', pokemon.heldItem ? french('items', pokemon.heldItem) : '—'],
+    ['Ball', french('items', pokemon.ball)],
     ['Amitié', pokemon.friendship],
     ['Dresseur d\'origine', pokemon.originalTrainer || '—'],
   ]);
@@ -377,7 +395,7 @@ function showPokemon(pokemon) {
   const moves = el('ul', 'moves');
   moves.append(...pokemon.moves.map((move) => {
     const item = el('li');
-    item.append(el('span', '', prettify(move.name)), el('span', 'muted', `${move.pp}/${move.maxPp}`));
+    item.append(el('span', '', french('moves', move.name)), el('span', 'muted', `${move.pp}/${move.maxPp}`));
     return item;
   }));
   right.append(table, el('div', 'separator'), moves);
@@ -538,7 +556,7 @@ function openPlayerFromAddress() {
 window.addEventListener('hashchange', openPlayerFromAddress);
 
 loadServer();
-loadPlayers().then(openPlayerFromAddress);
+Promise.all([loadTranslations(), loadPlayers()]).then(openPlayerFromAddress);
 
 // the data is refreshed every few minutes, so the counter is reloaded every minute
 setInterval(loadServer, 60000);

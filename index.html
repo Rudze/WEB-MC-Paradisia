@@ -67,6 +67,7 @@
       <nav class="navbar">
         <ul class="navbar-list">
           <li><button class="navbar-link active" data-nav-link="accueil">Accueil</button></li>
+          <li><button class="navbar-link navbar-shop" data-nav-link="boutique">Boutique</button></li>
           <li><button class="navbar-link" data-nav-link="joueurs">Joueurs</button></li>
           <li><button class="navbar-link" data-nav-link="carte">Carte</button></li>
           <li><button class="navbar-link" data-nav-link="blog">Blog</button></li>
@@ -223,6 +224,51 @@
           Le serveur est sur <strong>liste blanche</strong> : avant ta première connexion, demande à <strong>Rudzee</strong>
           sur le <a href="https://discord.gg/6ffyCYq3Ea" target="_blank" rel="noopener">Discord</a> de t'ajouter avec ton pseudo Minecraft.
         </p>
+
+      </article>
+
+
+      <!--
+        - #BOUTIQUE: cosmetics given in game in exchange for a donation
+        - To add an item, copy a <li class="shop-item"> block.
+      -->
+      <article data-page="boutique">
+
+        <header>
+          <h2 class="h2 article-title">Boutique</h2>
+        </header>
+
+        <section class="hero shop-intro">
+          <p>
+            La boutique sert à <strong>financer l'hébergement du serveur</strong>. Chaque don aide à garder
+            Paradisia en ligne, et en remerciement tu reçois un objet cosmétique en jeu.
+          </p>
+          <p>
+            Pour faire un don, rapproche-toi de <strong>Rudy</strong> en ouvrant un <strong>ticket sur le Discord</strong>
+            et dis-lui quel objet tu veux. Une fois le don réalisé auprès de Rudy, l'objet te sera donné en jeu.
+          </p>
+          <div class="buttons">
+            <a class="btn btn-pink" href="https://discord.gg/6ffyCYq3Ea" target="_blank" rel="noopener">
+              <ion-icon name="logo-discord"></ion-icon><span>Ouvrir un ticket sur le Discord</span>
+            </a>
+          </div>
+        </section>
+
+        <ul class="shop-list">
+
+          <li class="card shop-item">
+            <figure class="shop-img">
+              <img src="./assets/images/shop/pikachu_ears.svg" alt="Oreilles de Pikachu" width="160" height="120">
+            </figure>
+            <h3 class="h3">Oreilles de Pikachu</h3>
+            <p class="muted">Cosmétique · emplacement chapeau</p>
+            <div class="shop-buy">
+              <span class="price">1 €</span>
+              <a class="btn btn-pink" href="https://discord.gg/6ffyCYq3Ea" target="_blank" rel="noopener">Faire un don</a>
+            </div>
+          </li>
+
+        </ul>
 
       </article>
 

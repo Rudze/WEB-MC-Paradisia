@@ -33,12 +33,13 @@ Les données viennent de l'API du serveur Minecraft, fournie par le mod `nh_api`
 
 ## Fonctionnalités
 
-* ✅ **Onglets** comme le Portfolio : **Accueil**, **Joueurs**, **Carte**, **Blog**, et un lien vers le Portfolio
+* ✅ **Onglets** comme le Portfolio : **Accueil**, **Boutique** (en rose), **Joueurs**, **Carte**, **Blog**, et un lien vers le Portfolio
+* ✅ **Boutique** : des cosmétiques donnés en jeu en échange d'un don, pour financer l'hébergement
 * ✅ **Accueil** : présentation du serveur, étapes pour le rejoindre, boutons pour télécharger le modpack et rejoindre le Discord
 * ✅ **Recherche** parmi tous les joueurs déjà connectés, avec un point vert pour ceux en ligne
 * ✅ **Profil** : tête du joueur, cœurs, armure et faim avec les icônes de Minecraft, niveau d'expérience, dimension, armure portée
 * ✅ **Économie** avec les pièces du mod Numismatic Overhaul
-* ✅ **Pokédex**, **Équipe** et **PC** (on parcourt les boîtes), avec le détail de chaque Pokémon au clic
+* ✅ **Pokédex**, **Équipe** et **PC** (on parcourt les boîtes), avec le détail de chaque Pokémon au clic, **en français** (espèces, attaques, talents, natures, objets)
 * ✅ **Statistiques** : temps de jeu, morts, monstres tués, distance parcourue, blocs minés…
 * ✅ **Carte** du monde de construction ([squaremap](https://github.com/jpenilla/squaremap)), intégrée au site
 * ✅ **Blog** avec filtres par catégorie et une fenêtre de lecture, comme les projets du Portfolio
@@ -59,9 +60,11 @@ WEB-MC-Paradisia/
 │       ├── pages.yml           # Toutes les 5 min : récupère les données et publie le site
 │       └── release.yml         # Release à chaque push sur main
 ├── scripts/
-│   └── fetch_data.py           # Télécharge les données (data/) et la carte (map/) depuis l'API
+│   ├── fetch_data.py           # Télécharge les données (data/) et la carte (map/) depuis l'API
+│   └── make_translations.py    # Crée assets/data/fr.json à partir des traductions de Cobblemon
 └── assets/
     ├── css/style.css           # Thème (repris du portfolio)
+    ├── data/fr.json            # Noms français des Pokémon, attaques, talents, natures et objets
     ├── js/script.js            # Lit les fichiers de data/ et remplit la page
     └── images/                 # Logo, favicon et icônes (cœurs, armure, faim, pièces)
 ```
@@ -86,6 +89,10 @@ serveur Minecraft (API nh_api) ──> GitHub Actions, toutes les 5 min ──> 
 ## Modifier le contenu
 
 **Lien Discord.** Dans `index.html`, c'est le bouton `data-discord` de la page d'accueil.
+
+**Ajouter un objet à la boutique.** Dans `index.html`, section `#BOUTIQUE`, copie un bloc `<li class="shop-item">` et change l'image (`assets/images/shop/`), le nom et le prix.
+
+**Noms français des Pokémon.** Après une mise à jour de Cobblemon, relance `python3 scripts/make_translations.py <jar de Cobblemon>`.
 
 **Ajouter un article au blog.** Dans `index.html`, section `#BLOG` :
 1. copie le bloc d'exemple `<li class="post-item">` (en commentaire) en haut de la liste, sans les marques de commentaire ;

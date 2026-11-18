@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 48" shape-rendering="crispEdges">
+  <!-- Pikachu ears, drawn like the in-game model: yellow base, black tips, tilted outwards -->
+  <g id="ear" transform="rotate(-22.5 22 44)">
+    <rect x="16" y="26" width="12" height="18" fill="#f8d030"/>
+    <rect x="25" y="26" width="3" height="18" fill="#d8a818"/>
+    <rect x="17" y="15" width="10" height="11" fill="#f8d030"/>
+    <rect x="24" y="15" width="3" height="11" fill="#d8a818"/>
+    <rect x="18" y="7" width="8" height="8" fill="#2a2a2a"/>
+    <rect x="23" y="7" width="3" height="8" fill="#151515"/>
+    <rect x="19.5" y="2" width="5" height="5" fill="#2a2a2a"/>
+  </g>
+  <g transform="translate(64 0) scale(-1 1)">
+    <use href="#ear"/>
+  </g>
+</svg>
