@@ -1,3 +1,9 @@
+## [1.0.12](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.11...v1.0.12) (2026-11-18)
+
+### Bug Fixes
+
+* remove the price from the shop, items are given for a donation ([830ce42](https://github.com/Rudze/WEB-MC-Paradisia/commit/830ce42ab6f6a899ff9994df673e734681fe0463))
+
 ## [1.0.11](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.10...v1.0.11) (2026-11-18)
 
 ### Bug Fixes
