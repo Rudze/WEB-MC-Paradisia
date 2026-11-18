@@ -1,3 +1,9 @@
+## [1.0.5](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.4...v1.0.5) (2026-11-18)
+
+### Bug Fixes
+
+* empty the blog and keep a post template for later ([530955d](https://github.com/Rudze/WEB-MC-Paradisia/commit/530955dedcb083f6cd150fa127725db4cca82192))
+
 ## [1.0.4](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.3...v1.0.4) (2026-11-18)
 
 ### Bug Fixes
