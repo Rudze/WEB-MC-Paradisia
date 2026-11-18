@@ -90,7 +90,7 @@ serveur Minecraft (API nh_api) ──> GitHub Actions, toutes les 5 min ──> 
 
 **Lien Discord.** Dans `index.html`, c'est le bouton `data-discord` de la page d'accueil.
 
-**Ajouter un objet à la boutique.** Dans `index.html`, section `#BOUTIQUE`, copie un bloc `<li class="shop-item">` et change l'image (`assets/images/shop/`), le nom et le prix.
+**Ajouter un objet à la boutique.** Dans `index.html`, section `#BOUTIQUE`, copie un bloc `<li class="shop-item">` et change l'image (`assets/images/shop/`) et le nom. Il n'y a pas de prix : chaque objet s'obtient par un don.
 
 **Noms français des Pokémon.** Après une mise à jour de Cobblemon, relance `python3 scripts/make_translations.py <jar de Cobblemon>`.
 
