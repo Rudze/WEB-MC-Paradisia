@@ -399,6 +399,10 @@ const pages = document.querySelectorAll('[data-page]');
 function showPage(name) {
   pages.forEach((page) => page.classList.toggle('active', page.dataset.page === name));
   navLinks.forEach((link) => link.classList.toggle('active', link.dataset.navLink === name));
+
+  // the map is loaded the first time its tab is opened
+  const mapFrame = $('[data-map-frame]');
+  if (name === 'carte' && !mapFrame.src) mapFrame.src = './map/';
 }
 
 navLinks.forEach((link) => link.addEventListener('click', () => {

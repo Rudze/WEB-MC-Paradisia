@@ -33,13 +33,14 @@ Les données viennent de l'API du serveur Minecraft, fournie par le mod `nh_api`
 
 ## Fonctionnalités
 
-* ✅ **Onglets** comme le Portfolio : **Accueil**, **Joueurs**, **Blog**, et un lien vers le Portfolio
+* ✅ **Onglets** comme le Portfolio : **Accueil**, **Joueurs**, **Carte**, **Blog**, et un lien vers le Portfolio
 * ✅ **Accueil** : présentation du serveur, étapes pour le rejoindre, boutons pour télécharger le modpack et rejoindre le Discord
 * ✅ **Recherche** parmi tous les joueurs déjà connectés, avec un point vert pour ceux en ligne
 * ✅ **Profil** : tête du joueur, cœurs, armure et faim avec les icônes de Minecraft, niveau d'expérience, dimension, armure portée
 * ✅ **Économie** avec les pièces du mod Numismatic Overhaul
 * ✅ **Pokédex**, **Équipe** et **PC** (on parcourt les boîtes), avec le détail de chaque Pokémon au clic
 * ✅ **Statistiques** : temps de jeu, morts, monstres tués, distance parcourue, blocs minés…
+* ✅ **Carte** du monde de construction ([squaremap](https://github.com/jpenilla/squaremap)), intégrée au site
 * ✅ **Blog** avec filtres par catégorie et une fenêtre de lecture, comme les projets du Portfolio
 * ✅ **Lien direct** vers un joueur : `…/#Rudzee`
 * ✅ **Responsive** : ordinateur, tablette et mobile
@@ -58,7 +59,7 @@ WEB-MC-Paradisia/
 │       ├── pages.yml           # Toutes les 5 min : récupère les données et publie le site
 │       └── release.yml         # Release à chaque push sur main
 ├── scripts/
-│   └── fetch_data.py           # Télécharge les données de l'API dans data/
+│   └── fetch_data.py           # Télécharge les données (data/) et la carte (map/) depuis l'API
 └── assets/
     ├── css/style.css           # Thème (repris du portfolio)
     ├── js/script.js            # Lit les fichiers de data/ et remplit la page
@@ -70,9 +71,10 @@ WEB-MC-Paradisia/
 ## Comment ça marche
 
 ```
-serveur Minecraft (API nh_api) ──> GitHub Actions, toutes les 5 min ──> data/*.json ──> GitHub Pages ──> navigateur
+serveur Minecraft (API nh_api) ──> GitHub Actions, toutes les 5 min ──> data/*.json + map/ ──> GitHub Pages ──> navigateur
 ```
 
+- **La carte** est faite par le mod [squaremap](https://github.com/jpenilla/squaremap) sur le serveur. L'API la renvoie zippée (`/api/map.zip`) et elle est publiée avec le site dans `map/`, puis affichée dans l'onglet Carte.
 - **Pas d'appel à l'API depuis le navigateur.** GitHub Actions télécharge les données et les publie avec le site, en fichiers JSON. La page ne lit que ses propres fichiers.
 - **Rien à installer sur le serveur**, et ni clé ni token : l'API est publique et en lecture seule.
 - **Les données ont quelques minutes de retard.** L'heure de la dernière mise à jour s'affiche sous le nombre de joueurs en ligne.

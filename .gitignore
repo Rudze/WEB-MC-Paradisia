@@ -6,3 +6,6 @@ __pycache__/
 
 # players data, downloaded by scripts/fetch_data.py
 data/
+
+# web map, downloaded by scripts/fetch_data.py
+map/

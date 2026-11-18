@@ -68,6 +68,7 @@
         <ul class="navbar-list">
           <li><button class="navbar-link active" data-nav-link="accueil">Accueil</button></li>
           <li><button class="navbar-link" data-nav-link="joueurs">Joueurs</button></li>
+          <li><button class="navbar-link" data-nav-link="carte">Carte</button></li>
           <li><button class="navbar-link" data-nav-link="blog">Blog</button></li>
           <li>
             <a class="navbar-link" href="https://rudze.github.io/WEB-Portfolio-Personal-main/" target="_blank" rel="noopener">
@@ -110,28 +111,28 @@
         <h3 class="h3 section-title">Le serveur</h3>
         <ul class="features">
           <li class="card">
-            <span class="feature-icon">🌿</span>
+            <img class="feature-icon" src="./assets/images/icons/feature_cobblemon.png" alt="" width="32" height="32">
             <div>
               <h4>Un monde peuplé de Cobblemon</h4>
               <p>Pas de zombies ni de creepers : le monde appartient aux Pokémon. Explore, capture et fais évoluer ton équipe.</p>
             </div>
           </li>
           <li class="card">
-            <span class="feature-icon">🤝</span>
+            <img class="feature-icon" src="./assets/images/icons/feature_community.png" alt="" width="32" height="32">
             <div>
               <h4>Un serveur communautaire</h4>
               <p>Une ville partagée où chacun a son terrain, une économie entre joueurs et des projets à construire ensemble.</p>
             </div>
           </li>
           <li class="card">
-            <span class="feature-icon">✨</span>
+            <img class="feature-icon" src="./assets/images/icons/feature_exclusive.png" alt="" width="32" height="32">
             <div>
               <h4>Du contenu exclusif</h4>
               <p>Des mods faits maison qu'on ne trouve nulle part ailleurs : primes, cosmétiques, meubles, serrures, sac à dos…</p>
             </div>
           </li>
           <li class="card">
-            <span class="feature-icon">🎮</span>
+            <img class="feature-icon" src="./assets/images/icons/feature_players.png" alt="" width="32" height="32">
             <div>
               <h4>Pour tous les joueurs</h4>
               <p>Débutant ou dresseur confirmé, tout le monde y trouve sa place. Le modpack s'installe en quelques minutes.</p>
@@ -307,6 +308,23 @@
           </section>
 
         </div>
+
+      </article>
+
+
+      <!--
+        - #CARTE: the squaremap web map of the build world, published with the site in map/
+      -->
+      <article data-page="carte">
+
+        <header>
+          <h2 class="h2 article-title">Carte</h2>
+        </header>
+
+        <p class="section-text">La carte du monde de construction, mise à jour toutes les quelques minutes.</p>
+
+        <!-- the map is only loaded when the tab is opened (src set by script.js) -->
+        <iframe class="map-frame" data-map-frame title="Carte du monde de construction"></iframe>
 
       </article>
 
