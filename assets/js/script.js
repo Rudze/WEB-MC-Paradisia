@@ -413,6 +413,9 @@ navLinks.forEach((link) => link.addEventListener('click', () => {
 \*-----------------------------------*/
 
 const posts = [...document.querySelectorAll('.post-item')];
+
+// "no post yet" message while the blog is empty
+$('[data-blog-empty]').hidden = posts.length > 0;
 const filterButtons = document.querySelectorAll('[data-filter-btn]');
 
 filterButtons.forEach((button) => button.addEventListener('click', () => {

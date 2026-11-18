@@ -86,7 +86,7 @@ serveur Minecraft (API nh_api) ──> GitHub Actions, toutes les 5 min ──> 
 **Lien Discord.** Dans `index.html`, c'est le bouton `data-discord` de la page d'accueil.
 
 **Ajouter un article au blog.** Dans `index.html`, section `#BLOG` :
-1. copie un bloc `<li class="post-item">` en haut de la liste ;
+1. copie le bloc d'exemple `<li class="post-item">` (en commentaire) en haut de la liste, sans les marques de commentaire ;
 2. change la catégorie (`data-category` : `annonces`, `mises-a-jour` ou `evenements`), le texte de la couverture, la date et le titre ;
 3. écris l'article dans `<div class="post-details">`.
 
