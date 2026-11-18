@@ -709,12 +709,59 @@ code {
 
 .section-title { margin-bottom: 15px; }
 
+.hero p + p { margin-top: 10px; }
+
+.section-text { margin-bottom: 12px; }
+
+/* launcher choice: two big buttons, the selected one is lit */
+.launchers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.launcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid var(--jet);
+  background: var(--eerie-black-1);
+  color: var(--light-gray);
+  font-weight: var(--fw-500);
+  transition: border-color var(--transition-1), color var(--transition-1), transform var(--transition-1);
+}
+
+.launcher img { width: 40px; height: 40px; }
+
+.launcher:hover { transform: translateY(-2px); }
+
+.launcher.active {
+  border-color: var(--white-1);
+  color: var(--white-2);
+  box-shadow: 0 0 0 1px var(--white-1);
+}
+
+.note {
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px dashed var(--jet);
+  line-height: 1.6;
+}
+
+.note strong { color: var(--white-2); font-weight: var(--fw-500); }
+
 .features,
 .steps {
   display: grid;
   gap: 15px;
   margin-bottom: 30px;
 }
+
+.steps { margin-bottom: 15px; }
 
 .features li,
 .steps li {

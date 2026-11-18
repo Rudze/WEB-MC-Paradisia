@@ -409,6 +409,21 @@ navLinks.forEach((link) => link.addEventListener('click', () => {
 
 
 /*-----------------------------------*\
+  #ACCUEIL: launcher choice (Prism or CurseForge)
+\*-----------------------------------*/
+
+const launcherButtons = document.querySelectorAll('[data-launcher-btn]');
+const launcherSteps = document.querySelectorAll('[data-launcher]');
+
+launcherButtons.forEach((button) => button.addEventListener('click', () => {
+  const launcher = button.dataset.launcherBtn;
+  launcherButtons.forEach((other) => other.classList.toggle('active', other === button));
+  launcherSteps.forEach((steps) => { steps.hidden = steps.dataset.launcher !== launcher; });
+}));
+
+
+
+/*-----------------------------------*\
   #BLOG: category filter and post window (the portfolio's projects)
 \*-----------------------------------*/
 
