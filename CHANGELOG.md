@@ -1,3 +1,9 @@
+## [1.0.9](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.8...v1.0.9) (2026-11-18)
+
+### Bug Fixes
+
+* add a fullscreen button and a taller frame to the map tab ([b0af583](https://github.com/Rudze/WEB-MC-Paradisia/commit/b0af583576d678992f5caeee06752fefc48f789e))
+
 ## [1.0.8](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.7...v1.0.8) (2026-11-18)
 
 ### Bug Fixes
