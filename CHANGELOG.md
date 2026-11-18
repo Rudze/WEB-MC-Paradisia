@@ -1,3 +1,9 @@
+## [1.0.8](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.7...v1.0.8) (2026-11-18)
+
+### Bug Fixes
+
+* add the build world map tab and Minecraft item icons on the home page ([29cea95](https://github.com/Rudze/WEB-MC-Paradisia/commit/29cea95d350bee012a20f99b0c9629eab0c2d1a5))
+
 ## [1.0.7](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.6...v1.0.7) (2026-11-18)
 
 ### Bug Fixes
