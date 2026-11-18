@@ -3,12 +3,12 @@
 /*
  * Paradisia player dashboard.
  *
- * The page asks the Minecraft server's API (mod nh_api) for its data. The API address is "./api":
- * the web server in front of the site forwards /api to the Minecraft server and adds the secret key,
- * so the key never reaches the browser (see dev-server.py and deploy/nginx.conf).
+ * The page reads its data from the Minecraft server's public API (mod nh_api).
+ * The address must be HTTPS: GitHub Pages serves the site over HTTPS, and browsers block
+ * HTTP requests made from an HTTPS page.
  */
 
-const API = './api';
+const API = 'https://vps-12df6529.vps.ovh.ca/api';
 
 // pictures from public services
 const headUrl = (uuid, size) => `https://mc-heads.net/avatar/${uuid}/${size}`;
