@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.0...v1.0.1) (2026-11-18)
+
+### Bug Fixes
+
+* call the public Minecraft API directly so the site can be hosted on GitHub Pages ([3e1827d](https://github.com/Rudze/WEB-MC-Paradisia/commit/3e1827da3f429d2789842a698ac47a4ae90ae4e5))
+
 ## 1.0.0 (2026-11-18)
 
 ### Features
