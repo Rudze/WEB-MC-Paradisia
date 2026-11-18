@@ -402,8 +402,12 @@ function showPage(name) {
 }
 
 navLinks.forEach((link) => link.addEventListener('click', () => {
-  showPage(link.dataset.navLink);
+  const page = link.dataset.navLink;
+  showPage(page);
   window.scrollTo(0, 0);
+  // the player's name in the address (#Rudzee) only belongs to the Joueurs page:
+  // removed on the other tabs, so reloading the page doesn't jump back to Joueurs
+  if (page !== 'joueurs' && location.hash) history.replaceState(null, '', location.pathname);
 }));
 
 
