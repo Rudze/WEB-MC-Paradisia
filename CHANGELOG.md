@@ -1,3 +1,9 @@
+## [1.0.7](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.6...v1.0.7) (2026-11-18)
+
+### Bug Fixes
+
+* stay on the home page after a reload once the Joueurs tab is left ([5df2b2f](https://github.com/Rudze/WEB-MC-Paradisia/commit/5df2b2fe95ac7893f6384bd9160b46c47c554308))
+
 ## [1.0.6](https://github.com/Rudze/WEB-MC-Paradisia/compare/v1.0.5...v1.0.6) (2026-11-18)
 
 ### Bug Fixes
