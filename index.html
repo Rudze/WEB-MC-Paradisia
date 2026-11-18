@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paradisia — Joueurs</title>
+  <title>Paradisia — Serveur Minecraft Cobblemon</title>
 
   <link rel="icon" href="./assets/images/favicon.png" type="image/png">
   <link rel="stylesheet" href="./assets/css/style.css">
@@ -30,7 +30,7 @@
   <main>
 
     <!--
-      - #SIDEBAR: server logo, status and the player search
+      - #SIDEBAR: server logo, status and the player search (shown on every page)
     -->
     <aside class="sidebar">
 
@@ -58,90 +58,283 @@
 
     </aside>
 
-    <!--
-      - #PLAYER: everything about the selected player
-    -->
-    <article class="player">
 
-      <header>
-        <h2 class="h2 article-title" data-player-title>Joueurs</h2>
-      </header>
+    <div class="main-content">
 
-      <p class="empty" data-empty>Choisis un joueur dans la liste pour voir ses statistiques.</p>
+      <!--
+        - #NAVBAR: the tabs, like the portfolio
+      -->
+      <nav class="navbar">
+        <ul class="navbar-list">
+          <li><button class="navbar-link active" data-nav-link="accueil">Accueil</button></li>
+          <li><button class="navbar-link" data-nav-link="joueurs">Joueurs</button></li>
+          <li><button class="navbar-link" data-nav-link="blog">Blog</button></li>
+          <li>
+            <a class="navbar-link" href="https://rudze.github.io/WEB-Portfolio-Personal-main/" target="_blank" rel="noopener">
+              Portfolio
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-      <div class="cards" data-cards hidden>
 
-        <!-- profile: head, health, armour, food -->
-        <section class="card card-profile">
-          <div class="profile-head">
-            <img data-head alt="" width="80" height="80">
+      <!--
+        - #ACCUEIL: what the server is and how to join it
+      -->
+      <article class="active" data-page="accueil">
+
+        <header>
+          <h2 class="h2 article-title">Bienvenue sur Paradisia</h2>
+        </header>
+
+        <section class="hero">
+          <p>
+            <strong>Paradisia</strong> est un serveur Minecraft <strong>Cobblemon</strong> entre amis :
+            un monde 100 % Pokémon à explorer, une ville où construire sa maison et une vraie économie.
+          </p>
+          <div class="buttons">
+            <a class="btn btn-primary" href="https://github.com/Rudze/JAVA-MC-MODS-Paradisia/releases/latest" target="_blank" rel="noopener">
+              <ion-icon name="download-outline"></ion-icon><span>Télécharger le modpack</span>
+            </a>
+            <!-- the Discord invite link -->
+            <a class="btn" href="https://discord.gg/REPLACE_ME" target="_blank" rel="noopener" data-discord>
+              <ion-icon name="logo-discord"></ion-icon><span>Rejoindre le Discord</span>
+            </a>
+          </div>
+        </section>
+
+        <h3 class="h3 section-title">Sur le serveur</h3>
+        <ul class="features">
+          <li class="card"><span class="feature-icon">🎓</span><div><h4>Le Professeur Chen</h4><p>Il t'accueille à ton arrivée, te remet ton Pokédex et te fait choisir ton starter.</p></div></li>
+          <li class="card"><span class="feature-icon">🌿</span><div><h4>Un monde 100 % Pokémon</h4><p>Pas de zombies ni de creepers : seulement des Pokémon sauvages à capturer.</p></div></li>
+          <li class="card"><span class="feature-icon">🏡</span><div><h4>La ville</h4><p>Obtiens ton propre terrain auprès du maire et construis ce que tu veux.</p></div></li>
+          <li class="card"><span class="feature-icon">💰</span><div><h4>Une vraie économie</h4><p>Pièces de bronze, d'argent et d'or, et un impôt foncier chaque semaine.</p></div></li>
+        </ul>
+
+        <h3 class="h3 section-title">Rejoindre le serveur</h3>
+        <ol class="steps">
+          <li class="card">
+            <span class="step-number">1</span>
             <div>
-              <p class="profile-name" data-name></p>
-              <p class="badge" data-online></p>
-              <p class="muted" data-last-seen></p>
+              <h4>Installe Prism Launcher</h4>
+              <p>Télécharge <a href="https://prismlauncher.org/download/" target="_blank" rel="noopener">Prism Launcher</a> (gratuit) et connecte ton compte Microsoft.</p>
             </div>
-          </div>
-
-          <ul class="bars">
-            <li><span class="bar-label">❤️ Vie</span><span class="bar"><span data-bar="health"></span></span><span data-value="health"></span></li>
-            <li><span class="bar-label">🛡️ Armure</span><span class="bar"><span data-bar="armor"></span></span><span data-value="armor"></span></li>
-            <li><span class="bar-label">🍗 Faim</span><span class="bar"><span data-bar="food"></span></span><span data-value="food"></span></li>
-          </ul>
-
-          <ul class="facts" data-profile-facts></ul>
-
-          <ul class="armor-list" data-armor></ul>
-        </section>
-
-        <!-- money -->
-        <section class="card">
-          <h3 class="h3 card-title">💰 Économie</h3>
-          <ul class="coins" data-coins></ul>
-        </section>
-
-        <!-- pokédex -->
-        <section class="card">
-          <h3 class="h3 card-title">📕 Pokédex</h3>
-          <ul class="facts" data-pokedex></ul>
-          <span class="bar bar-wide"><span data-bar="pokedex"></span></span>
-        </section>
-
-        <!-- party -->
-        <section class="card card-wide">
-          <h3 class="h3 card-title">⚔️ Équipe</h3>
-          <ul class="pokemon-grid party" data-party></ul>
-        </section>
-
-        <!-- pc, one box at a time -->
-        <section class="card card-wide">
-          <div class="card-title-row">
-            <h3 class="h3 card-title">💻 PC</h3>
-            <div class="box-nav">
-              <button data-box-prev aria-label="Boîte précédente"><ion-icon name="chevron-back"></ion-icon></button>
-              <span data-box-name></span>
-              <button data-box-next aria-label="Boîte suivante"><ion-icon name="chevron-forward"></ion-icon></button>
+          </li>
+          <li class="card">
+            <span class="step-number">2</span>
+            <div>
+              <h4>Télécharge le modpack</h4>
+              <p>Sur la <a href="https://github.com/Rudze/JAVA-MC-MODS-Paradisia/releases/latest" target="_blank" rel="noopener">dernière version</a>, prends le fichier <code>Paradisia-x.x.x.zip</code>. Ne le décompresse pas.</p>
             </div>
-          </div>
-          <ul class="pokemon-grid pc" data-pc></ul>
-        </section>
+          </li>
+          <li class="card">
+            <span class="step-number">3</span>
+            <div>
+              <h4>Importe-le dans Prism</h4>
+              <p><strong>Ajouter une instance → Importer</strong>, choisis le <code>.zip</code>, puis <strong>OK</strong>.</p>
+            </div>
+          </li>
+          <li class="card">
+            <span class="step-number">4</span>
+            <div>
+              <h4>Joue !</h4>
+              <p>Lance l'instance : le jeu te connecte directement au serveur. Le serveur est sur liste blanche : demande à <strong>Rudzee</strong> sur le Discord de t'ajouter avec ton pseudo.</p>
+            </div>
+          </li>
+        </ol>
 
-        <!-- details of the pokémon clicked in the party or the pc -->
-        <section class="card card-wide" data-pokemon-card hidden>
-          <h3 class="h3 card-title" data-pokemon-title></h3>
-          <div class="pokemon-details" data-pokemon-details></div>
-        </section>
+      </article>
 
-        <!-- play time and other statistics -->
-        <section class="card card-wide">
-          <h3 class="h3 card-title">⏱️ Statistiques</h3>
-          <ul class="stats" data-stats></ul>
-        </section>
 
-      </div>
+      <!--
+        - #JOUEURS: everything about the selected player
+      -->
+      <article data-page="joueurs">
 
-    </article>
+        <header>
+          <h2 class="h2 article-title" data-player-title>Joueurs</h2>
+        </header>
+
+        <p class="empty" data-empty>Choisis un joueur dans la liste pour voir ses statistiques.</p>
+
+        <div class="cards" data-cards hidden>
+
+          <!-- profile: head, health, armour, food -->
+          <section class="card card-profile">
+            <div class="profile-head">
+              <img data-head alt="" width="80" height="80">
+              <div>
+                <p class="profile-name" data-name></p>
+                <p class="badge" data-online></p>
+                <p class="muted" data-last-seen></p>
+              </div>
+            </div>
+
+            <!-- rows of minecraft icons, filled by script.js -->
+            <div class="hud">
+              <div class="hud-row" data-hud="health"></div>
+              <div class="hud-row" data-hud="armor"></div>
+              <div class="hud-row" data-hud="food"></div>
+            </div>
+
+            <ul class="facts" data-profile-facts></ul>
+
+            <ul class="armor-list" data-armor></ul>
+          </section>
+
+          <!-- money -->
+          <section class="card">
+            <h3 class="h3 card-title">Économie</h3>
+            <ul class="coins" data-coins></ul>
+          </section>
+
+          <!-- pokédex -->
+          <section class="card">
+            <h3 class="h3 card-title">Pokédex</h3>
+            <ul class="facts" data-pokedex></ul>
+            <span class="bar bar-wide"><span data-bar="pokedex"></span></span>
+          </section>
+
+          <!-- party -->
+          <section class="card card-wide">
+            <h3 class="h3 card-title">Équipe</h3>
+            <ul class="pokemon-grid party" data-party></ul>
+          </section>
+
+          <!-- pc, one box at a time -->
+          <section class="card card-wide">
+            <div class="card-title-row">
+              <h3 class="h3 card-title">PC</h3>
+              <div class="box-nav">
+                <button data-box-prev aria-label="Boîte précédente"><ion-icon name="chevron-back"></ion-icon></button>
+                <span data-box-name></span>
+                <button data-box-next aria-label="Boîte suivante"><ion-icon name="chevron-forward"></ion-icon></button>
+              </div>
+            </div>
+            <ul class="pokemon-grid pc" data-pc></ul>
+          </section>
+
+          <!-- details of the pokémon clicked in the party or the pc -->
+          <section class="card card-wide" data-pokemon-card hidden>
+            <h3 class="h3 card-title" data-pokemon-title></h3>
+            <div class="pokemon-details" data-pokemon-details></div>
+          </section>
+
+          <!-- play time and other statistics -->
+          <section class="card card-wide">
+            <h3 class="h3 card-title">Statistiques</h3>
+            <ul class="stats" data-stats></ul>
+          </section>
+
+        </div>
+
+      </article>
+
+
+      <!--
+        - #BLOG: news of the server, shown like the portfolio's projects
+        - To add a post, copy a <li class="post-item"> block and change its texts.
+      -->
+      <article data-page="blog">
+
+        <header>
+          <h2 class="h2 article-title">Blog</h2>
+        </header>
+
+        <ul class="filter-list">
+          <li><button class="active" data-filter-btn="all">Tous</button></li>
+          <li><button data-filter-btn="annonces">Annonces</button></li>
+          <li><button data-filter-btn="mises-a-jour">Mises à jour</button></li>
+          <li><button data-filter-btn="evenements">Événements</button></li>
+        </ul>
+
+        <ul class="post-list">
+
+          <li class="post-item active" data-category="annonces">
+            <button data-post-open>
+              <figure class="post-img">
+                <div class="post-cover"><span class="cover-title">SITE</span><span class="cover-sub">Le site de Paradisia</span></div>
+              </figure>
+              <p class="post-meta"><time>18 nov. 2026</time> · Annonces</p>
+              <h3 class="post-title">Le site de Paradisia est en ligne</h3>
+            </button>
+            <!-- shown in the post window -->
+            <div class="post-details" hidden>
+              <p>Paradisia a maintenant son site ! Tu y trouves comment rejoindre le serveur, et la page <strong>Joueurs</strong> pour voir les statistiques de chacun.</p>
+              <ul>
+                <li>Vie, armure, faim et niveau d'expérience</li>
+                <li>Argent en pièces de bronze, d'argent et d'or</li>
+                <li>Équipe et PC Cobblemon, avec le détail de chaque Pokémon</li>
+                <li>Temps de jeu et plein d'autres statistiques</li>
+              </ul>
+              <p>Les données sont mises à jour automatiquement toutes les quelques minutes.</p>
+            </div>
+          </li>
+
+          <li class="post-item active" data-category="mises-a-jour">
+            <button data-post-open>
+              <figure class="post-img">
+                <div class="post-cover"><span class="cover-title">RESPAWN</span><span class="cover-sub">Pénalité de mort</span></div>
+              </figure>
+              <p class="post-meta"><time>13 nov. 2026</time> · Mises à jour</p>
+              <h3 class="post-title">Fin de la pénalité de mort</h3>
+            </button>
+            <div class="post-details" hidden>
+              <p>Les 10 minutes d'attente avant de réapparaître sont supprimées. Tu réapparais tout de suite, avec toute ta vie et ta faim.</p>
+            </div>
+          </li>
+
+          <li class="post-item active" data-category="mises-a-jour">
+            <button data-post-open>
+              <figure class="post-img">
+                <div class="post-cover"><span class="cover-title">STOCKAGE</span><span class="cover-sub">Tom's Simple Storage</span></div>
+              </figure>
+              <p class="post-meta"><time>12 nov. 2026</time> · Mises à jour</p>
+              <h3 class="post-title">Tom's Simple Storage remplace Iron Chests</h3>
+            </button>
+            <div class="post-details" hidden>
+              <p>Le mod <strong>Iron Chests</strong> est retiré et remplacé par <strong>Tom's Simple Storage</strong> : un terminal qui regroupe tous tes coffres en un seul inventaire, avec une barre de recherche.</p>
+              <ul>
+                <li>Les crafts n'utilisent plus de perle de l'Ender : un simple coffre suffit</li>
+                <li>Pense à mettre à jour ton modpack</li>
+              </ul>
+            </div>
+          </li>
+
+        </ul>
+
+      </article>
+
+    </div>
 
   </main>
+
+
+  <!--
+    - #POST WINDOW (the portfolio's project modal)
+  -->
+  <div class="pm" data-pm aria-hidden="true">
+    <div class="pm-overlay" data-pm-close></div>
+
+    <div class="pm-dialog" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+      <button class="pm-close" data-pm-close aria-label="Fermer"><ion-icon name="close-outline"></ion-icon></button>
+
+      <figure class="pm-media" data-pm-media></figure>
+
+      <div class="pm-body">
+        <p class="post-meta" data-pm-meta></p>
+        <h3 class="pm-title" id="pm-title" data-pm-title></h3>
+        <div class="pm-details" data-pm-details></div>
+      </div>
+
+      <div class="pm-nav">
+        <button class="pm-nav-btn" data-pm-prev><ion-icon name="chevron-back"></ion-icon><span>Précédent</span></button>
+        <span class="pm-count" data-pm-count></span>
+        <button class="pm-nav-btn" data-pm-next><span>Suivant</span><ion-icon name="chevron-forward"></ion-icon></button>
+      </div>
+    </div>
+  </div>
+
 
   <script src="./assets/js/script.js"></script>
 

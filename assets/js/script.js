@@ -142,7 +142,11 @@ function renderPlayerList() {
     head.alt = '';
 
     button.append(head, el('span', 'player-name', player.name), el('span', 'dot' + (player.online ? ' online' : '')));
-    button.addEventListener('click', () => { location.hash = player.name; });
+    button.addEventListener('click', () => {
+      // same player again: the address doesn't change, so open the page directly
+      if (location.hash === '#' + player.name) openPlayerFromAddress();
+      else location.hash = player.name;
+    });
 
     const item = el('li', 'player-item');
     item.append(button);
@@ -200,13 +204,10 @@ function renderProfile(player) {
   online.className = 'badge' + (player.online ? ' online' : '');
   $('[data-last-seen]').textContent = player.online ? '' : 'Vu le ' + formatDate(player.lastSeen);
 
-  // health and food are counted in half hearts / half drumsticks, like in game
-  setBar('health', status.health, status.maxHealth);
-  setBar('armor', status.armor, 20);
-  setBar('food', status.food, 20);
-  $('[data-value="health"]').textContent = `${Math.ceil(status.health) / 2} ❤`;
-  $('[data-value="armor"]').textContent = `${status.armor / 2}`;
-  $('[data-value="food"]').textContent = `${status.food / 2}`;
+  // rows of minecraft icons: 1 icon = 2 points, like in game
+  renderHud('health', 'heart', Math.ceil(status.health), status.maxHealth, `${Math.ceil(status.health) / 2} / ${status.maxHealth / 2}`);
+  renderHud('armor', 'armor', status.armor, 20, `${status.armor / 2} / 10`);
+  renderHud('food', 'food', status.food, 20, `${status.food / 2} / 10`);
 
   fillFacts($('[data-profile-facts]'), [
     ['Niveau d\'expérience', status.xpLevel],
@@ -218,11 +219,29 @@ function renderProfile(player) {
   $('[data-armor]').replaceChildren(...armor.map((item) => el('li', '', item.name)));
 }
 
+// one row of icons: "points" out of "max", e.g. 7 points out of 20 = 3 full hearts, 1 half, 6 empty
+function renderHud(row, icon, points, max, label) {
+  const icons = [];
+  for (let i = 0; i < Math.ceil(max / 2); i++) {
+    const left = points - i * 2;
+    const state = left >= 2 ? 'full' : left === 1 ? 'half' : 'empty';
+    icons.push(el('span', `icon ${icon}-${state}`));
+  }
+  $(`[data-hud="${row}"]`).replaceChildren(...icons, el('span', 'value', label));
+}
+
 function renderEconomy(economy) {
-  const coins = [['🟡 Or', economy.gold], ['⚪ Argent', economy.silver], ['🟤 Bronze', economy.bronze]];
-  $('[data-coins]').replaceChildren(...coins.map(([label, amount]) => {
+  // coin textures of the Numismatic Overhaul mod
+  const coins = [['gold', 'Or', economy.gold], ['silver', 'Argent', economy.silver], ['bronze', 'Bronze', economy.bronze]];
+  $('[data-coins]').replaceChildren(...coins.map(([coin, label, amount]) => {
+    const image = el('img');
+    image.src = `./assets/images/icons/coin_${coin}.png`;
+    image.alt = '';
+    const name = el('span');
+    name.append(image, label);
+
     const item = el('li');
-    item.append(el('span', '', label), el('strong', '', formatNumber(amount)));
+    item.append(name, el('strong', '', formatNumber(amount)));
     return item;
   }));
 }
@@ -371,6 +390,88 @@ function showPokemon(pokemon) {
 
 
 /*-----------------------------------*\
+  #PAGES (tabs, like the portfolio)
+\*-----------------------------------*/
+
+const navLinks = document.querySelectorAll('[data-nav-link]');
+const pages = document.querySelectorAll('[data-page]');
+
+function showPage(name) {
+  pages.forEach((page) => page.classList.toggle('active', page.dataset.page === name));
+  navLinks.forEach((link) => link.classList.toggle('active', link.dataset.navLink === name));
+}
+
+navLinks.forEach((link) => link.addEventListener('click', () => {
+  showPage(link.dataset.navLink);
+  window.scrollTo(0, 0);
+}));
+
+
+
+/*-----------------------------------*\
+  #BLOG: category filter and post window (the portfolio's projects)
+\*-----------------------------------*/
+
+const posts = [...document.querySelectorAll('.post-item')];
+const filterButtons = document.querySelectorAll('[data-filter-btn]');
+
+filterButtons.forEach((button) => button.addEventListener('click', () => {
+  const category = button.dataset.filterBtn;
+  filterButtons.forEach((other) => other.classList.toggle('active', other === button));
+  posts.forEach((post) => post.classList.toggle('active', category === 'all' || post.dataset.category === category));
+}));
+
+const pm = $('[data-pm]');
+let currentPost = null;
+
+// only the posts shown by the filter
+const visiblePosts = () => posts.filter((post) => post.classList.contains('active'));
+
+function fillPost(post) {
+  $('[data-pm-media]').innerHTML = post.querySelector('.post-cover').outerHTML;
+  $('[data-pm-meta]').textContent = post.querySelector('.post-meta').textContent;
+  $('[data-pm-title]').textContent = post.querySelector('.post-title').textContent;
+  $('[data-pm-details]').innerHTML = post.querySelector('.post-details').innerHTML;
+  const list = visiblePosts();
+  $('[data-pm-count]').textContent = `${list.indexOf(post) + 1} / ${list.length}`;
+  currentPost = post;
+}
+
+function openPost(post) {
+  fillPost(post);
+  pm.classList.add('open');
+  pm.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('pm-locked');
+}
+
+function closePost() {
+  pm.classList.remove('open');
+  pm.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('pm-locked');
+  currentPost = null;
+}
+
+// previous (-1) or next (+1) post
+function stepPost(direction) {
+  const list = visiblePosts();
+  fillPost(list[(list.indexOf(currentPost) + direction + list.length) % list.length]);
+}
+
+posts.forEach((post) => post.querySelector('[data-post-open]').addEventListener('click', () => openPost(post)));
+pm.querySelectorAll('[data-pm-close]').forEach((button) => button.addEventListener('click', closePost));
+$('[data-pm-prev]').addEventListener('click', () => stepPost(-1));
+$('[data-pm-next]').addEventListener('click', () => stepPost(1));
+
+document.addEventListener('keydown', (e) => {
+  if (!currentPost) return;
+  if (e.key === 'Escape') closePost();
+  if (e.key === 'ArrowLeft') stepPost(-1);
+  if (e.key === 'ArrowRight') stepPost(1);
+});
+
+
+
+/*-----------------------------------*\
   #BACKGROUND: dots lit around the cursor (from the portfolio)
 \*-----------------------------------*/
 
@@ -394,10 +495,17 @@ if (bgFx && window.matchMedia('(pointer: fine)').matches) {
 \*-----------------------------------*/
 
 // the selected player is kept in the address (#Rudzee), so a link opens their page directly
-window.addEventListener('hashchange', () => showPlayer(decodeURIComponent(location.hash.slice(1))));
+function openPlayerFromAddress() {
+  const name = decodeURIComponent(location.hash.slice(1));
+  if (!name) return;
+  showPage('joueurs');
+  showPlayer(name);
+}
+
+window.addEventListener('hashchange', openPlayerFromAddress);
 
 loadServer();
-loadPlayers().then(() => showPlayer(decodeURIComponent(location.hash.slice(1))));
+loadPlayers().then(openPlayerFromAddress);
 
 // the data is refreshed every few minutes, so the counter is reloaded every minute
 setInterval(loadServer, 60000);

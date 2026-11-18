@@ -33,14 +33,14 @@ Les données viennent de l'API du serveur Minecraft, fournie par le mod `nh_api`
 
 ## Fonctionnalités
 
+* ✅ **Onglets** comme le Portfolio : **Accueil**, **Joueurs**, **Blog**, et un lien vers le Portfolio
+* ✅ **Accueil** : présentation du serveur, étapes pour le rejoindre, boutons pour télécharger le modpack et rejoindre le Discord
 * ✅ **Recherche** parmi tous les joueurs déjà connectés, avec un point vert pour ceux en ligne
-* ✅ **Profil** : tête du joueur, vie, armure, faim, niveau d'expérience, mode de jeu, dimension et armure portée
-* ✅ **Économie** : pièces d'or, d'argent et de bronze
-* ✅ **Pokédex** : espèces vues et capturées, avec le pourcentage de complétion
-* ✅ **Équipe** : les 6 Pokémon du joueur
-* ✅ **PC** : on parcourt les boîtes une par une
-* ✅ **Détail d'un Pokémon** au clic : nature, talent, objet tenu, Ball, IV, EV et attaques
+* ✅ **Profil** : tête du joueur, cœurs, armure et faim avec les icônes de Minecraft, niveau d'expérience, dimension, armure portée
+* ✅ **Économie** avec les pièces du mod Numismatic Overhaul
+* ✅ **Pokédex**, **Équipe** et **PC** (on parcourt les boîtes), avec le détail de chaque Pokémon au clic
 * ✅ **Statistiques** : temps de jeu, morts, monstres tués, distance parcourue, blocs minés…
+* ✅ **Blog** avec filtres par catégorie et une fenêtre de lecture, comme les projets du Portfolio
 * ✅ **Lien direct** vers un joueur : `…/#Rudzee`
 * ✅ **Responsive** : ordinateur, tablette et mobile
 
@@ -62,7 +62,7 @@ WEB-MC-Paradisia/
 └── assets/
     ├── css/style.css           # Thème (repris du portfolio)
     ├── js/script.js            # Lit les fichiers de data/ et remplit la page
-    └── images/                 # Logo et favicon
+    └── images/                 # Logo, favicon et icônes (cœurs, armure, faim, pièces)
 ```
 
 ---
@@ -79,9 +79,18 @@ serveur Minecraft (API nh_api) ──> GitHub Actions, toutes les 5 min ──> 
 - **Si le serveur change d'adresse**, modifie `API_URL` dans `scripts/fetch_data.py`.
 - **Inactivité :** GitHub met en pause les tâches planifiées d'un repo sans commit depuis 60 jours. Il suffit alors de les relancer depuis l'onglet **Actions**.
 
-Les images viennent de services publics :
-- les têtes des joueurs : [mc-heads.net](https://mc-heads.net) ;
-- les sprites des Pokémon : [PokeAPI sprites](https://github.com/PokeAPI/sprites).
+---
+
+## Modifier le contenu
+
+**Lien Discord.** Dans `index.html`, cherche `discord.gg/REPLACE_ME` et remplace-le par ton lien d'invitation.
+
+**Ajouter un article au blog.** Dans `index.html`, section `#BLOG` :
+1. copie un bloc `<li class="post-item">` en haut de la liste ;
+2. change la catégorie (`data-category` : `annonces`, `mises-a-jour` ou `evenements`), le texte de la couverture, la date et le titre ;
+3. écris l'article dans `<div class="post-details">`.
+
+**Images.** Les têtes des joueurs viennent de [mc-heads.net](https://mc-heads.net) et les sprites des Pokémon de [PokeAPI](https://github.com/PokeAPI/sprites). Cobblemon n'a que des modèles 3D, pas d'images 2D. Les icônes de cœur, d'armure et de faim viennent de Minecraft, et les pièces du mod Numismatic Overhaul.
 
 ---
 
